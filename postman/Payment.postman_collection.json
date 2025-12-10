@@ -1,0 +1,86 @@
+{
+	"info": {
+		"_postman_id": "05c5b274-c80a-4c0b-91a0-25fadc925ef7",
+		"name": "Payment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50716080",
+		"_collection_link": "https://gold-spaceship-414806.postman.co/workspace/Team-Workspace~3499550b-4a96-4346-84db-6b8bf6dcb219/collection/50716080-05c5b274-c80a-4c0b-91a0-25fadc925ef7?action=share&source=collection_link&creator=50716080"
+	},
+	"item": [
+		{
+			"name": "orders",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "amount",
+							"value": "199.99",
+							"type": "text"
+						},
+						{
+							"key": "currency",
+							"value": "USD",
+							"type": "text"
+						},
+						{
+							"key": "customer_email",
+							"value": "customer@example.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}orders",
+					"host": [
+						"{{url}}orders"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:8000/"
+		}
+	]
+}
