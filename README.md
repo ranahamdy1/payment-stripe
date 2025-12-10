@@ -48,3 +48,5 @@ app/
 ├── Models/
 ├── Traits/
 ```
+### API Testing
+Use the Postman collection to test payment APIs: [PaymentAPIs.json](postman/Payment.postman_collection.json)
