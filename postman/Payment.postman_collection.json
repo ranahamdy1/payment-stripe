@@ -28,7 +28,7 @@
 					"formdata": [
 						{
 							"key": "amount",
-							"value": "199.99",
+							"value": "200",
 							"type": "text"
 						},
 						{
@@ -50,7 +50,317 @@
 					]
 				}
 			},
-			"response": []
+			"response": [
+				{
+					"name": "orders",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "amount",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "currency",
+									"value": "USD",
+									"type": "text"
+								},
+								{
+									"key": "customer_email",
+									"value": "customer@example.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}orders",
+							"host": [
+								"{{url}}orders"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 14 Dec 2025 11:55:39 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Order created successfully\",\n    \"data\": {\n        \"order_id\": 7,\n        \"amount\": \"200.00\",\n        \"currency\": \"usd\",\n        \"customer_email\": \"customer@example.com\",\n        \"status\": \"pending\",\n        \"created_at\": \"2025-12-14T11:55:38.000000Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "payments-initiate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "order_id",
+							"value": "6",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}payments/initiate",
+					"host": [
+						"{{url}}payments"
+					],
+					"path": [
+						"initiate"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "payments-initiate",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "order_id",
+									"value": "6",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}payments/initiate",
+							"host": [
+								"{{url}}payments"
+							],
+							"path": [
+								"initiate"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 14 Dec 2025 11:56:04 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Payment initiated successfully\",\n    \"data\": {\n        \"payment_id\": 8,\n        \"order_id\": 6,\n        \"payment_gateway\": \"stripe\",\n        \"transaction_id\": \"cs_test_a19Tk2VEF2k4FauSofvLhIZws77Y9dDkyRcKBdGRs8KJqUJ8axPki5TlJb\",\n        \"amount\": \"200.00\",\n        \"status\": \"pending\",\n        \"checkout_url\": \"https://checkout.stripe.com/c/pay/cs_test_a19Tk2VEF2k4FauSofvLhIZws77Y9dDkyRcKBdGRs8KJqUJ8axPki5TlJb#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdkdWxOYHwnPyd1blpxYHZxWjA0VmdgbUBOVTJ3SERLaXJOSj1yPGJKbn02NjVRdjFjSVBVc3xXQkNUbmduS1NERmRkPTRIPXd2T0trMWZQbzdSX0hoUEttf3xCa2BUY3Fob2tMX1Q8NjJyNTVAcEQ8PUJDSicpJ2N3amhWYHdzYHcnP3F3cGApJ2dkZm5id2pwa2FGamlqdyc%2FJyZjY2NjY2MnKSdpZHxqcHFRfHVgJz8ndmxrYmlgWmxxYGgnKSdga2RnaWBVaWRmYG1qaWFgd3YnP3F3cGB4JSUl\",\n        \"created_at\": \"2025-12-14T11:56:04.000000Z\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "webhook",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Stripe-Signature",
+						"value": " t=123456,v1=anyvalue",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"evt_test_webhook\",\r\n  \"type\": \"checkout.session.completed\",\r\n  \"data\": {\r\n    \"object\": {\r\n      \"id\": \"cs_test_a19Tk2VEF2k4FauSofvLhIZws77Y9dDkyRcKBdGRs8KJqUJ8axPki5TlJb\",\r\n      \"payment_intent\": \"pi_test_example123\",\r\n      \"metadata\": {\r\n        \"order_id\": 6\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}stripe/webhook",
+					"host": [
+						"{{url}}stripe"
+					],
+					"path": [
+						"webhook"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "webhook",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Stripe-Signature",
+								"value": " t=123456,v1=anyvalue",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"evt_test_webhook\",\r\n  \"type\": \"checkout.session.completed\",\r\n  \"data\": {\r\n    \"object\": {\r\n      \"id\": \"cs_test_a19Tk2VEF2k4FauSofvLhIZws77Y9dDkyRcKBdGRs8KJqUJ8axPki5TlJb\",\r\n      \"payment_intent\": \"pi_test_example123\",\r\n      \"metadata\": {\r\n        \"order_id\": 6\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}stripe/webhook",
+							"host": [
+								"{{url}}stripe"
+							],
+							"path": [
+								"webhook"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 14 Dec 2025 12:07:52 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"message\": \"Webhook handled successfully\",\n    \"data\": null\n}"
+				}
+			]
 		}
 	],
 	"event": [
