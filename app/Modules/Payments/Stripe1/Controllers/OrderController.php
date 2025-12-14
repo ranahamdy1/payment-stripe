@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Modules\Payments\Controllers;
+namespace App\Modules\Payments\Stripe1\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Payments\Requests\StoreOrderRequest;
-use App\Modules\Payments\Resources\OrderResource;
-use App\Modules\Payments\Services\OrderService;
-use Illuminate\Http\JsonResponse;
+use App\Modules\Payments\Stripe1\Requests\StoreOrderRequest;
+use App\Modules\Payments\Stripe1\Resources\OrderResource;
+use App\Modules\Payments\Stripe1\Services\OrderService;
 use App\Traits\ApiResponse;
+use Illuminate\Http\JsonResponse;
 
 class OrderController extends Controller
 {

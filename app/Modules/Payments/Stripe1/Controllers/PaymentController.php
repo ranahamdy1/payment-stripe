@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modules\Payments\Controllers;
+namespace App\Modules\Payments\Stripe1\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Payments\Requests\InitiatePaymentRequest;
-use App\Modules\Payments\Resources\PaymentResource;
-use App\Modules\Payments\Services\OrderService;
-use App\Modules\Payments\Services\PaymentService;
+use App\Modules\Payments\Stripe1\Requests\InitiatePaymentRequest;
+use App\Modules\Payments\Stripe1\Resources\PaymentResource;
+use App\Modules\Payments\Stripe1\Services\OrderService;
+use App\Modules\Payments\Stripe1\Services\PaymentService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

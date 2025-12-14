@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Modules\Payments\Services;
+namespace App\Modules\Payments\Stripe1\Services;
 
-use App\Modules\Payments\Repositories\OrderRepository;
 use App\Models\Order;
+use App\Modules\Payments\Stripe1\Repositories\OrderRepository;
 
 class OrderService
 {

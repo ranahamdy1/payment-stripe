@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modules\Payments\Services;
+namespace App\Modules\Payments\Stripe1\Services;
 
-use App\Modules\Payments\Repositories\PaymentRepository;
-use App\Models\Payment;
 use App\Models\Order;
-use Stripe\Stripe;
+use App\Models\Payment;
+use App\Modules\Payments\Stripe1\Repositories\PaymentRepository;
 use Stripe\Checkout\Session as CheckoutSession;
+use Stripe\Stripe;
 
 class PaymentService
 {

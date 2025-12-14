@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Modules\Payments\Providers;
+namespace App\Modules\Payments\Stripe2\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
-class PaymentServiceProvider extends ServiceProvider
+class StripeServiceProvider extends ServiceProvider
 {
     public function boot()
     {

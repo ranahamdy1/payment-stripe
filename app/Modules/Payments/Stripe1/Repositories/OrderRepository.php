@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Payments\Repositories;
+namespace App\Modules\Payments\Stripe1\Repositories;
 
 use App\Models\Order;
 

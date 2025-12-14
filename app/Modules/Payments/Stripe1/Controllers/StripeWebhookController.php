@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Modules\Payments\Controllers;
+namespace App\Modules\Payments\Stripe1\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Payments\Repositories\PaymentRepository;
+use App\Modules\Payments\Stripe1\Repositories\PaymentRepository;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
-use App\Traits\ApiResponse;
 
 class StripeWebhookController extends Controller
 {
