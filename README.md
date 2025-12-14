@@ -35,6 +35,25 @@ It uses a clean architecture with Service and Repository layers, and standardize
   "order_id": 1
 }
 ```
+#### 3. Stripe Webhook
+- Endpoint: POST /api/v1/stripe/webhook
+- Body type: raw JSON
+```php
+{
+  "id": "evt_test_webhook",
+  "type": "checkout.session.completed",
+  "data": {
+    "object": {
+      "id": "cs_test_a19Tk2VEF2k4FauSofvLhIZws77Y9dDkyRcKBdGRs8KJqUJ8axPki5TlJb",
+      "payment_intent": "pi_test_example123",
+      "metadata": {
+        "order_id": 6
+      }
+    }
+  }
+}
+```
+
 ### Project Structure
 ```
 app/
