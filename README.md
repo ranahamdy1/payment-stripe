@@ -1,14 +1,17 @@
 # Payment API Laravel with Stripe
 ### Overview
+This project is a Stripe-based Laravel Payment API that allows creating orders and initiating payments using two different Stripe integrations.
 
-This project is a Laravel-based Payment API that allows creating orders and initiating payments using Stripe Checkout.
-It uses a clean architecture with Service and Repository layers, and standardizes JSON responses using a reusable ApiResponse trait.
-
+<details>
+  <summary>Stripe 1 </summary>
+    
 ### Features:
 
-1- Create orders (POST /api/orders)
+1- Create orders (POST /api/v1/orders)
 
-2- Initiate Stripe payments (POST /api/payments/initiate)
+2- Initiate Stripe payments (POST /api/v1/payments/initiate)
+
+3- webhook (POST /api/v1/stripe/webhook)
 
 - Clean API responses (success, error, validationError, notFound, etc.)
 
@@ -53,17 +56,47 @@ It uses a clean architecture with Service and Repository layers, and standardize
   }
 }
 ```
+</details> 
+
+<details>
+  <summary>Stripe 2 </summary>
+    
+### Features:
+
+1- Create payment intent (POST /api/v1/stripe/create-payment-intent)
+
+2- confirm-payment (POST /api/v1/stripe/confirm-payment)
+
+### API Endpoints
+
+#### 1.  Create payment intent
+- Endpoint: POST /api/v1/stripe/create-payment-intent
+- body :
+```php
+{
+  "order_id": 1
+}
+```
+#### 2.  confirm-payment
+- Endpoint: POST /api/v1/stripe/confirm-payment
+- body :
+```php
+{
+  "order_id": 1,
+  "payment_intent_id": "pi_3Lxxxxxxx"
+}
+```
+
+</details> 
+
 
 ### Project Structure
 ```
 app/
 ├── Modules/
 │   └── Payments/
-│       ├── Controllers/
-│       ├── Repositories/
-│       ├── Requests/
-│       ├── Resources/
-│       └── Services/
+│       ├── Stripe1/
+│       ├── Stripe2/
 ├── Models/
 ├── Traits/
 ```
