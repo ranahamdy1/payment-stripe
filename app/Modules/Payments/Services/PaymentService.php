@@ -23,8 +23,8 @@ class PaymentService
 
         $amountInCents = (int) round($order->amount * 100);
 
-        $successUrl = config('app.url') . '/payment/success?session_id={CHECKOUT_SESSION_ID}';
-        $cancelUrl  = config('app.url') . '/payment/cancel';
+        $successUrl = config('app.url') . '/api/v1/payment/success?session_id={CHECKOUT_SESSION_ID}';
+        $cancelUrl  = config('app.url') . '/api/v1/payment/cancel';
 
         $session = CheckoutSession::create([
             'payment_method_types' => ['card'],

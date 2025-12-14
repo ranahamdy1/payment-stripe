@@ -9,6 +9,7 @@ use App\Modules\Payments\Services\OrderService;
 use App\Modules\Payments\Services\PaymentService;
 use App\Traits\ApiResponse;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
@@ -49,4 +50,20 @@ class PaymentController extends Controller
             200
         );
     }
+
+    public function successPayment(Request $request)
+    {
+        $sessionId = $request->query('session_id');
+        return response()->view('payments.success', [
+            'session_id' => $sessionId
+        ]);
+    }
+
+    public function cancelPayment(Request $request)
+    {
+        return response()->view('payments.cancel');
+    }
+
+
+
 }
