@@ -86,6 +86,7 @@ This project is a Stripe-based Laravel Payment API that allows creating orders a
   "payment_intent_id": "pi_3Lxxxxxxx"
 }
 ```
+- [READ](https://medium.com/@AbdullahTellawi/flutter-stripe-with-laravel-apple-pay-877a39d12a1a)
 
 </details> 
 
