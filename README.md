@@ -90,8 +90,9 @@ This project is a Stripe-based Laravel Payment API that allows creating orders a
 
 </details> 
 
-
-### Project Structure
+<details>
+  <summary> Project Structure </summary>
+    
 ```
 app/
 ├── Modules/
@@ -101,5 +102,8 @@ app/
 ├── Models/
 ├── Traits/
 ```
-### Postman collection (API Testing)
-- [Postman collection](https://documenter.getpostman.com/view/50716080/2sBXVcksdT)
+</details> 
+
+
+### API Documentation
+- [Postman Documentation](https://documenter.getpostman.com/view/50716080/2sBXVcksdT)
