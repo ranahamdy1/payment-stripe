@@ -83,7 +83,7 @@ This project is a Stripe-based Laravel Payment API that allows creating orders a
 ```php
 {
   "order_id": 1,
-  "payment_intent_id": "pi_3Lxxxxxxx"
+  "payment_method_id": "pm_card_visa"
 }
 ```
 - [READ](https://medium.com/@AbdullahTellawi/flutter-stripe-with-laravel-apple-pay-877a39d12a1a)
@@ -101,5 +101,5 @@ app/
 ├── Models/
 ├── Traits/
 ```
-### API Testing
-Use the Postman collection to test payment APIs: [PaymentAPIs.json](postman/Payment.postman_collection.json)
+### Postman collection (API Testing)
+- [Postman collection](https://documenter.getpostman.com/view/50716080/2sBXVcksdT)
