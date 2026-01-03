@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id');
             $table->string('payment_gateway');
             $table->string('transaction_id')->nullable();
+            $table->string('stripe_payment_intent_id')->nullable();
             $table->decimal('amount', 10, 2);
             $table->string('status')->default('pending');
             $table->json('metadata')->nullable();

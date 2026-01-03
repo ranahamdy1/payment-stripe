@@ -5,15 +5,19 @@ namespace App\Modules\Payments\Stripe2\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Payment;
+use App\Traits\ApiResponse;
 use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\PaymentIntent;
-use App\Traits\ApiResponse;
+use Illuminate\Support\Facades\Log;
 
 class StripeController extends Controller
 {
     use ApiResponse;
 
+    /**
+     * Create a Stripe PaymentIntent
+     */
     public function createPaymentIntent(Request $request)
     {
         $request->validate([
@@ -25,64 +29,77 @@ class StripeController extends Controller
 
             Stripe::setApiKey(config('services.stripe.secret_key'));
 
-            $amount = intval(round($order->amount * 100));
+            // minimum amount logic
+            $amount = max((float)$order->amount, 0.5);
 
             $paymentIntent = PaymentIntent::create([
-                'amount' => $amount,
+                'amount' => (int) round($amount * 100),
                 'currency' => $order->currency,
-                'automatic_payment_methods' => ['enabled' => true],
+                'automatic_payment_methods' => [
+                    'enabled' => true,
+                    'allow_redirects' => 'never',
+                ],
+                'metadata' => [
+                    'order_id' => $order->id,
+                ],
             ]);
 
             $payment = Payment::create([
                 'order_id' => $order->id,
                 'payment_gateway' => 'stripe',
-                'transaction_id' => $paymentIntent->id,
                 'amount' => $order->amount,
                 'status' => 'pending',
-                'metadata' => [
-                    'client_secret' => $paymentIntent->client_secret,
-                ],
+                'stripe_payment_intent_id' => $paymentIntent->id,
             ]);
 
             return $this->success([
-                'payment_intent_id' => $paymentIntent->id,
                 'client_secret' => $paymentIntent->client_secret,
                 'payment_id' => $payment->id,
                 'publishableKey' => config('services.stripe.public_key'),
-            ], 'Payment intent created successfully');
+            ], 'PaymentIntent created successfully');
 
         } catch (\Exception $e) {
-            return $this->error($e->getMessage(), 500);
+            Log::error('Stripe createPaymentIntent error: ' . $e->getMessage());
+            return $this->error('Failed to create PaymentIntent: ' . $e->getMessage(), 500);
         }
     }
 
+    /**
+     * Confirm a Stripe payment
+     */
     public function confirmPayment(Request $request)
     {
         $request->validate([
-            'payment_intent_id' => 'required|string',
+            'payment_method_id' => 'required|string',
             'order_id' => 'required|integer|exists:orders,id',
         ]);
 
-        try {
-            $order = Order::findOrFail($request->order_id);
+        $order = Order::findOrFail($request->order_id);
 
+        $payment = Payment::where('order_id', $order->id)->firstOrFail();
+
+        if ($payment->status === 'paid') {
+            return $this->error('Payment already completed', 400);
+        }
+
+        try {
             Stripe::setApiKey(config('services.stripe.secret_key'));
 
-            $intent = PaymentIntent::retrieve($request->payment_intent_id);
+            $intent = PaymentIntent::retrieve($payment->stripe_payment_intent_id);
+            $intent->confirm(['payment_method' => $request->payment_method_id]);
 
-            if ($intent->status !== 'succeeded') {
-                return $this->error('Payment not completed', 400, ['stripe_status' => $intent->status]);
+            if ($intent->status === 'succeeded') {
+                $payment->update(['status' => 'paid']);
+                $order->update(['status' => 'paid', 'payment_id' => $payment->id]);
             }
 
-            $payment = Payment::where('transaction_id', $intent->id)->where('order_id', $order->id)->firstOrFail();
-
-            $payment->update(['status' => 'paid']);
-            $order->update(['status' => 'paid', 'payment_id' => $payment->id]);
-
-            return $this->success(['payment_id' => $payment->id], 'Payment confirmed & order updated successfully');
+            return $this->success([
+                'stripe_status' => $intent->status,
+            ], 'Payment confirmation status');
 
         } catch (\Exception $e) {
-            return $this->error($e->getMessage(), 500);
+            Log::error('Stripe confirmPayment error: ' . $e->getMessage());
+            return $this->error('Failed to confirm payment: ' . $e->getMessage(), 400);
         }
     }
 }

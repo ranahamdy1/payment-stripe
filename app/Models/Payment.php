@@ -11,6 +11,7 @@ class Payment extends Model
         'order_id',
         'payment_gateway',
         'transaction_id',
+        'stripe_payment_intent_id',
         'amount',
         'status',
         'metadata',
